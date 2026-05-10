@@ -149,6 +149,8 @@
     <string name="keyboard">Keyboard</string>
     <string name="apps">Apps</string>
     <string name="general">General</string>
+    <string name="enable_keyboard_handling_title">Enable keyboard shortcuts</string>
+    <string name="enable_keyboard_handling_summary">Allow Smart Dock to handle keyboard input</string>
     <string name="enable_open_menu_title">Meta or Home to open the apps menu</string>
     <string name="enable_lock_desktop_title">Alt+L to lock the desktop</string>
     <string name="enable_open_settings_title">Alt+P to open settings</string>

@@ -551,6 +551,9 @@ class DockService : AccessibilityService(), OnSharedPreferenceChangeListener, On
 
     //Handle keyboard shortcuts
     override fun onKeyEvent(event: KeyEvent): Boolean {
+        if (!sharedPreferences.getBoolean("enable_keyboard_handling", true)) {
+            return super.onKeyEvent(event)
+        }
         if (event.action == KeyEvent.ACTION_UP) {
             if (event.isAltPressed) {
                 if (event.keyCode == KeyEvent.KEYCODE_L && sharedPreferences.getBoolean(

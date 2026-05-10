@@ -149,6 +149,8 @@
     <string name="keyboard">Teclado</string>
     <string name="apps">Aplicaciones</string>
     <string name="general">General</string>
+    <string name="enable_keyboard_handling_title">Enable keyboard shortcuts</string>
+    <string name="enable_keyboard_handling_summary">Allow Smart Dock to handle keyboard input</string>
     <string name="enable_open_menu_title">Meta o Home para abrir el menú de apps</string>
     <string name="enable_lock_desktop_title">Alt+L para bloquear el escritorio</string>
     <string name="enable_open_settings_title">Alt+P para abrir la configuración</string>
