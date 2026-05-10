@@ -17,38 +17,51 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/apps_lv"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_centerInParent="true"
-            android:layout_centerVertical="true"
             android:fadingEdgeLength="6dp"
             android:requiresFadingEdge="horizontal" />
 
         <LinearLayout
             android:id="@+id/system_tray"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
-            <ImageView
-                android:id="@+id/pin_btn"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:layout_margin="5dp"
-                android:background="@drawable/circle"
-                android:padding="8dp"
-                android:src="@drawable/ic_unpin" />
-
-            <LinearLayout
-                android:gravity="center_vertical"
-                android:id="@+id/status_area"
+            <FrameLayout
+                android:id="@+id/pin_btn_container"
                 android:layout_width="wrap_content"
-                android:layout_height="35dp"
-                android:layout_margin="5dp"
-                android:background="@drawable/search_background"
-                android:padding="5dp">
+                android:layout_height="match_parent"
+                android:background="?android:attr/selectableItemBackground"
+                android:paddingHorizontal="5dp">
+
+                <ImageView
+                    android:id="@+id/pin_btn"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/circle"
+                    android:padding="8dp"
+                    android:src="@drawable/ic_unpin" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/status_area_container"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="?android:attr/selectableItemBackground"
+                android:paddingHorizontal="5dp">
+
+                <LinearLayout
+                    android:id="@+id/status_area"
+                    android:layout_width="wrap_content"
+                    android:layout_height="35dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/search_background"
+                    android:gravity="center_vertical"
+                    android:padding="5dp">
 
                 <TextView
                     android:id="@+id/notifications_btn"
@@ -90,70 +103,117 @@
                     android:gravity="center_vertical"
                     android:textColor="@android:color/white"
                     app:drawableStartCompat="@drawable/battery_charging_full" />
-            </LinearLayout>
+                </LinearLayout>
+            </FrameLayout>
 
 
-            <TextClock
-                android:id="@+id/date_btn"
+            <FrameLayout
+                android:id="@+id/date_btn_container"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:textColor="@android:color/white" />
+                android:layout_height="match_parent"
+                android:background="?android:attr/selectableItemBackground"
+                android:paddingHorizontal="10dp">
+
+                <TextClock
+                    android:id="@+id/date_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:textColor="@android:color/white" />
+            </FrameLayout>
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/nav_panel"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_alignParentStart="true"
-            android:layout_centerVertical="true"
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
-            <ImageView
-                android:id="@+id/apps_btn"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_margin="6dp"
-                android:src="@drawable/ic_apps_menu" />
+            <FrameLayout
+                android:id="@+id/apps_btn_container"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="?android:attr/selectableItemBackground"
+                android:paddingHorizontal="6dp">
 
-            <ImageView
-                android:id="@+id/back_btn"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_margin="6dp"
-                android:background="@drawable/circle"
-                android:padding="10dp"
-                android:src="@drawable/ic_back"
-                android:visibility="gone" />
+                <ImageView
+                    android:id="@+id/apps_btn"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_apps_menu" />
+            </FrameLayout>
 
-            <ImageView
-                android:id="@+id/home_btn"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_margin="6dp"
-                android:background="@drawable/circle"
-                android:padding="10dp"
-                android:src="@drawable/ic_home" />
+            <FrameLayout
+                android:id="@+id/back_btn_container"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="?android:attr/selectableItemBackground"
+                android:paddingHorizontal="6dp"
+                android:visibility="gone">
 
-            <ImageView
-                android:id="@+id/recents_btn"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_margin="6dp"
-                android:background="@drawable/circle"
-                android:padding="10dp"
-                android:src="@drawable/ic_recents" />
+                <ImageView
+                    android:id="@+id/back_btn"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/circle"
+                    android:padding="10dp"
+                    android:src="@drawable/ic_back" />
+            </FrameLayout>
 
-            <ImageView
-                android:id="@+id/assist_btn"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_margin="6dp"
-                android:background="@drawable/circle"
-                android:padding="8dp"
-                android:src="@drawable/ic_assistant" />
+            <FrameLayout
+                android:id="@+id/home_btn_container"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="?android:attr/selectableItemBackground"
+                android:paddingHorizontal="6dp">
+
+                <ImageView
+                    android:id="@+id/home_btn"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/circle"
+                    android:padding="10dp"
+                    android:src="@drawable/ic_home" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/recents_btn_container"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="?android:attr/selectableItemBackground"
+                android:paddingHorizontal="6dp">
+
+                <ImageView
+                    android:id="@+id/recents_btn"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/circle"
+                    android:padding="10dp"
+                    android:src="@drawable/ic_recents" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/assist_btn_container"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="?android:attr/selectableItemBackground"
+                android:paddingHorizontal="6dp">
+
+                <ImageView
+                    android:id="@+id/assist_btn"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/circle"
+                    android:padding="8dp"
+                    android:src="@drawable/ic_assistant" />
+            </FrameLayout>
         </LinearLayout>
     </RelativeLayout>
 

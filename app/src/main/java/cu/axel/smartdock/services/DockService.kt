@@ -143,16 +143,22 @@ class DockService : AccessibilityService(), OnSharedPreferenceChangeListener, On
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var activityManager: ActivityManager
     private lateinit var appsBtn: ImageView
+    private lateinit var appsBtnContainer: View
     private lateinit var backBtn: ImageView
+    private lateinit var backBtnContainer: View
     private lateinit var homeBtn: ImageView
+    private lateinit var homeBtnContainer: View
     private lateinit var recentBtn: ImageView
+    private lateinit var recentBtnContainer: View
     private lateinit var assistBtn: ImageView
+    private lateinit var assistBtnContainer: View
     private lateinit var powerBtn: ImageView
     private lateinit var bluetoothBtn: ImageView
     private lateinit var wifiBtn: ImageView
     private lateinit var batteryBtn: TextView
     private lateinit var volumeBtn: ImageView
     private lateinit var pinBtn: ImageView
+    private lateinit var pinBtnContainer: View
     private lateinit var notificationBtn: TextView
     private lateinit var searchTv: TextView
     private var topRightCorner: Button? = null
@@ -187,6 +193,7 @@ class DockService : AccessibilityService(), OnSharedPreferenceChangeListener, On
     private lateinit var bluetoothManager: BluetoothManager
     private lateinit var pinnedApps: ArrayList<App>
     private lateinit var dateTv: TextClock
+    private lateinit var dateTvContainer: View
     private var maxApps = 0
     private var maxAppsLandscape = 0
     private lateinit var context: Context
@@ -201,6 +208,7 @@ class DockService : AccessibilityService(), OnSharedPreferenceChangeListener, On
     private var iconPackUtils: IconPackUtils? = null
     private var notificationBridge: INotificationServiceBridge? = null
     private lateinit var statusArea: LinearLayout
+    private lateinit var statusAreaContainer: View
     override fun onCreate() {
         super.onCreate()
         db = DBHelper(this)
@@ -1544,30 +1552,30 @@ class DockService : AccessibilityService(), OnSharedPreferenceChangeListener, On
     }
 
     private fun updateNavigationBar() {
-        appsBtn.visibility =
+        appsBtnContainer.visibility =
             if (sharedPreferences.getBoolean(
                     "enable_nav_apps$orientationValue",
                     true
                 )
             ) View.VISIBLE else View.GONE
-        backBtn.visibility =
+        backBtnContainer.visibility =
             if (sharedPreferences.getBoolean(
                     "enable_nav_back$orientationValue",
                     true
                 )
             ) View.VISIBLE else View.GONE
-        homeBtn.visibility =
+        homeBtnContainer.visibility =
             if (sharedPreferences.getBoolean(
                     "enable_nav_home$orientationValue",
                     true
                 )
             ) View.VISIBLE else View.GONE
-        recentBtn.visibility = if (sharedPreferences.getBoolean(
+        recentBtnContainer.visibility = if (sharedPreferences.getBoolean(
                 "enable_nav_recents$orientationValue",
                 true
             )
         ) View.VISIBLE else View.GONE
-        assistBtn.visibility = if (sharedPreferences.getBoolean(
+        assistBtnContainer.visibility = if (sharedPreferences.getBoolean(
                 "enable_nav_assist$orientationValue",
                 false
             )
@@ -1597,7 +1605,7 @@ class DockService : AccessibilityService(), OnSharedPreferenceChangeListener, On
                     true
                 )
             ) View.VISIBLE else View.GONE
-        pinBtn.visibility =
+        pinBtnContainer.visibility =
             if (sharedPreferences.getBoolean(
                     "enable_qs_pin$orientationValue",
                     true
@@ -1609,12 +1617,15 @@ class DockService : AccessibilityService(), OnSharedPreferenceChangeListener, On
                     true
                 )
             ) View.VISIBLE else View.GONE
-        dateTv.visibility =
+        dateTvContainer.visibility =
             if (sharedPreferences.getBoolean(
                     "enable_qs_date$orientationValue",
                     true
                 )
             ) View.VISIBLE else View.GONE
+        statusAreaContainer.visibility =
+            if (notificationBtn.isVisible || bluetoothBtn.isVisible || batteryBtn.isVisible || wifiBtn.isVisible || volumeBtn.isVisible)
+                View.VISIBLE else View.GONE
     }
 
     private fun launchAssistant() {
@@ -2114,21 +2125,29 @@ class DockService : AccessibilityService(), OnSharedPreferenceChangeListener, On
         dockLayout = dock!!.findViewById(R.id.dock_layout)
         dockHandle = LayoutInflater.from(context).inflate(R.layout.dock_handle, null) as Button
         appsBtn = dock!!.findViewById(R.id.apps_btn)
+        appsBtnContainer = dock!!.findViewById(R.id.apps_btn_container)
         tasksGv = dock!!.findViewById(R.id.apps_lv)
         val layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         tasksGv.layoutManager = layoutManager
         backBtn = dock!!.findViewById(R.id.back_btn)
+        backBtnContainer = dock!!.findViewById(R.id.back_btn_container)
         homeBtn = dock!!.findViewById(R.id.home_btn)
+        homeBtnContainer = dock!!.findViewById(R.id.home_btn_container)
         recentBtn = dock!!.findViewById(R.id.recents_btn)
+        recentBtnContainer = dock!!.findViewById(R.id.recents_btn_container)
         assistBtn = dock!!.findViewById(R.id.assist_btn)
+        assistBtnContainer = dock!!.findViewById(R.id.assist_btn_container)
         notificationBtn = dock!!.findViewById(R.id.notifications_btn)
         pinBtn = dock!!.findViewById(R.id.pin_btn)
+        pinBtnContainer = dock!!.findViewById(R.id.pin_btn_container)
         statusArea = dock!!.findViewById(R.id.status_area)
+        statusAreaContainer = dock!!.findViewById(R.id.status_area_container)
         bluetoothBtn = dock!!.findViewById(R.id.bluetooth_btn)
         wifiBtn = dock!!.findViewById(R.id.wifi_btn)
         volumeBtn = dock!!.findViewById(R.id.volume_btn)
         batteryBtn = dock!!.findViewById(R.id.battery_btn)
         dateTv = dock!!.findViewById(R.id.date_btn)
+        dateTvContainer = dock!!.findViewById(R.id.date_btn_container)
         dock!!.setOnHoverListener { _, event ->
             if (event.action == MotionEvent.ACTION_HOVER_ENTER) {
                 if (dockLayout.isGone) showDock()
@@ -2151,28 +2170,28 @@ class DockService : AccessibilityService(), OnSharedPreferenceChangeListener, On
         dockLayout.setOnTouchListener(this)
         dockHandle!!.alpha = sharedPreferences.getString("handle_opacity", "0.5")!!.toFloat()
         dockHandle!!.setOnClickListener { pinDock() }
-        appsBtn.setOnClickListener { toggleAppMenu() }
-        appsBtn.setOnLongClickListener {
+        appsBtnContainer.setOnClickListener { toggleAppMenu() }
+        appsBtnContainer.setOnLongClickListener {
             launchApp(
                 null, null,
                 Intent(Settings.ACTION_APPLICATION_SETTINGS)
             )
             true
         }
-        assistBtn.setOnClickListener { launchAssistant() }
+        assistBtnContainer.setOnClickListener { launchAssistant() }
 
-        backBtn.setOnClickListener { performGlobalAction(GLOBAL_ACTION_BACK) }
-        backBtn.setOnLongClickListener {
+        backBtnContainer.setOnClickListener { performGlobalAction(GLOBAL_ACTION_BACK) }
+        backBtnContainer.setOnLongClickListener {
             performNavAction("enable_nav_back")
             true
         }
-        homeBtn.setOnClickListener { performGlobalAction(GLOBAL_ACTION_HOME) }
-        homeBtn.setOnLongClickListener {
+        homeBtnContainer.setOnClickListener { performGlobalAction(GLOBAL_ACTION_HOME) }
+        homeBtnContainer.setOnLongClickListener {
             performNavAction("enable_nav_home")
             true
         }
-        recentBtn.setOnClickListener { performGlobalAction(GLOBAL_ACTION_RECENTS) }
-        recentBtn.setOnLongClickListener {
+        recentBtnContainer.setOnClickListener { performGlobalAction(GLOBAL_ACTION_RECENTS) }
+        recentBtnContainer.setOnLongClickListener {
             performNavAction("enable_nav_recents")
             true
         }
@@ -2186,11 +2205,11 @@ class DockService : AccessibilityService(), OnSharedPreferenceChangeListener, On
                 }
             } else performGlobalAction(GLOBAL_ACTION_QUICK_SETTINGS)
         }
-        pinBtn.setOnClickListener { togglePin() }
-        statusArea.setOnClickListener {
+        pinBtnContainer.setOnClickListener { togglePin() }
+        statusAreaContainer.setOnClickListener {
             toggleQuickSettingsPanel(1)
         }
-        dateTv.setOnClickListener {
+        dateTvContainer.setOnClickListener {
             val action =
                 sharedPreferences.getString("enable_qs_date${orientationValue}_action", "clock")
             when (action) {
@@ -2204,7 +2223,7 @@ class DockService : AccessibilityService(), OnSharedPreferenceChangeListener, On
                 "unpin" -> unpinDock()
             }
         }
-        dateTv.setOnLongClickListener {
+        dateTvContainer.setOnLongClickListener {
             launchApp(
                 null, null,
                 Intent(Settings.ACTION_DATE_SETTINGS)
