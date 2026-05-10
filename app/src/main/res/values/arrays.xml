@@ -74,6 +74,13 @@
         <item>@string/lock_device</item>
         <item>@string/toggle_split_screen</item>
     </string-array>
+
+    <string-array name="clock_tap_actions">
+        <item>@string/launch_clock</item>
+        <item>@string/open_notifications</item>
+        <item>@string/open_qs</item>
+        <item>@string/unpin_dock</item>
+    </string-array>
  
     <string-array name="default_color_values" translatable="false">
         <item>#EF5350</item>

@@ -105,6 +105,7 @@
     <string name="enable_qs_wifi_title">Wi-Fi</string>
     <string name="enable_qs_vol_title">Volumen</string>
     <string name="enable_qs_date_title">Reloj</string>
+    <string name="enable_qs_date_action">Clock Action</string>
     <string name="enable_qs_pin_title">Pin</string>
     <string name="enable_qs_pin_summary">Todavía puede anclar/desanclar el Dock deslizandolo hacia abajo o usando el atajo de teclado</string>
     <string name="behaviour">Comportamiento</string>
@@ -316,6 +317,13 @@
     <string name="launch_assistant">Abrir app asistente</string>
     <string name="lock_device">Bloquear pantalla</string>
     <string name="toggle_split_screen">Activar pantalla dividida</string>
+
+    <!-- Clock tap actions dialog -->
+    <string name="launch_clock">Launch clock app</string>
+    <string name="unpin_dock">Unpin the dock</string>
+    <string name="open_qs">Open quick settings</string>
+
+    <!-- Other -->
     <string name="dock_background_opacity">Opacidad del fondo</string>
     <string name="override_dock_background_opacity">Opacidad del fondo perzonalizada</string>
     <string name="dock_hidden">Dock hidden</string>

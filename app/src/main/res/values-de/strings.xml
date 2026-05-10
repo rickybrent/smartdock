@@ -103,6 +103,7 @@
     <string name="enable_qs_wifi_title">Wi-Fi</string>
     <string name="enable_qs_vol_title">Lautstärke</string>
     <string name="enable_qs_date_title">Uhr</string>
+    <string name="enable_qs_date_action">Clock Action</string>
     <string name="enable_qs_pin_title">Pin</string>
     <string name="enable_qs_pin_summary">Sie können das Dock immer noch anheften/entheften, indem Sie nach unten wischen oder das Tastaturkürzel verwenden</string>
     <string name="behaviour">Verhalten</string>
@@ -317,6 +318,13 @@
     <string name="launch_assistant">Launch assistant app</string>
     <string name="lock_device">Lock device</string>
     <string name="toggle_split_screen">Toggle split screen</string>
+
+    <!-- Clock tap actions dialog -->
+    <string name="launch_clock">Launch clock app</string>
+    <string name="unpin_dock">Unpin the dock</string>
+    <string name="open_qs">Open quick settings</string>
+
+    <!-- Other -->
     <string name="hot_corners_help">Hover the mouse pointer over the corners to trigger their actions</string>
     <string name="dock_background_opacity">Background opacity</string>
     <string name="override_dock_background_opacity">Override background opacity</string>

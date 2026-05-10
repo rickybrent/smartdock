@@ -2188,10 +2188,18 @@ class DockService : AccessibilityService(), OnSharedPreferenceChangeListener, On
             toggleQuickSettingsPanel(1)
         }
         dateTv.setOnClickListener {
-            launchApp(
-                null,
-                sharedPreferences.getString("app_clock", "com.android.deskclock")!!
-            )
+            val action =
+                sharedPreferences.getString("enable_qs_date${orientationValue}_action", "clock")
+            when (action) {
+                "clock" -> launchApp(
+                    null,
+                    sharedPreferences.getString("app_clock", "com.android.deskclock")!!
+                )
+
+                "notifications" -> toggleQuickSettingsPanel()
+                "qs" -> toggleQuickSettingsPanel(1)
+                "unpin" -> unpinDock()
+            }
         }
         dateTv.setOnLongClickListener {
             launchApp(

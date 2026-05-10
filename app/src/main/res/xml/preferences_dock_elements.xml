@@ -47,7 +47,7 @@
             android:defaultValue="true"
             android:key="enable_qs_vol"
             android:title="@string/enable_qs_vol_title" />
-        <SwitchPreferenceCompat
+        <cu.axel.smartdock.preferences.ClockActionChooserPreference
             android:defaultValue="true"
             android:key="enable_qs_date"
             android:title="@string/enable_qs_date_title" />

@@ -103,6 +103,7 @@
     <string name="enable_qs_wifi_title">Wi-Fi</string>
     <string name="enable_qs_vol_title">音量</string>
     <string name="enable_qs_date_title">時鐘</string>
+    <string name="enable_qs_date_action">Clock Action</string>
     <string name="enable_qs_pin_title">釘選</string>
     <string name="enable_qs_pin_summary">仍可透過向下滑動或使用鍵盤快捷鍵釘選/取消釘選 Dock</string>
     <string name="behaviour">行為</string>
@@ -317,6 +318,12 @@
     <string name="lock_device">Lock device</string>
     <string name="toggle_split_screen">Toggle split screen</string>
 
+    <!-- Clock tap actions dialog -->
+    <string name="launch_clock">Launch clock app</string>
+    <string name="unpin_dock">Unpin the dock</string>
+    <string name="open_qs">Open quick settings</string>
+
+    <!-- Other -->
     <string name="hot_corners_help">Hover the mouse pointer over the corners to trigger their actions</string>
     <string name="dock_background_opacity">Dock background transparency</string>
     <string name="override_dock_background_opacity">Override background transparency</string>

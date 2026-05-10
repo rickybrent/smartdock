@@ -103,6 +103,7 @@
     <string name="enable_qs_wifi_title">ਵਾਈ-ਫਾਈ</string>
     <string name="enable_qs_vol_title">ਵਾਲੀਅਮ</string>
     <string name="enable_qs_date_title">ਘੜੀ</string>
+    <string name="enable_qs_date_action">Clock Action</string>
     <string name="enable_qs_pin_title">ਪਿੰਨ</string>
     <string name="enable_qs_pin_summary">ਡੋਕ ਨੂੰ ਪਿਨ ਅਤੇ ਅਨਪਿਨ ਡੋਕ ਤੇ ਸਵਾਇਪ ਕਰਕੇ ਜਾ ਕੀਬੋਰਡ ਸਾਰਟਕਟ ਦੁਆਰਾ ਕੀਤਾ ਜਾ ਸਕਦਾ ਹੈ</string>
     <string name="behaviour">ਵਿਵਹਾਰ</string>
@@ -318,6 +319,12 @@
     <string name="lock_device">ਡਿਵਾਈਸ ਲੋਕ ਕਰੋ</string>
     <string name="toggle_split_screen">ਤੌਗਲ ਸਪਲਿਟ ਸਕਰੀਨ</string>
 
+    <!-- Clock tap actions dialog -->
+    <string name="launch_clock">Launch clock app</string>
+    <string name="unpin_dock">Unpin the dock</string>
+    <string name="open_qs">Open quick settings</string>
+
+    <!-- Other -->
     <string name="hot_corners_help">ਕਾਰਨਰ ਦੇ ਐਕਸ਼ਨਾਂ ਨੂੰ ਚਾਲੂ ਕਰਨ ਲਈ ਮਾਊਸ ਪੁਆਇੰਟਰ ਨੂੰ ਉਹਨਾਂ ਉੱਤੇ ਰੱਖੋ</string>
     <string name="dock_background_opacity">Background opacity</string>
     <string name="override_dock_background_opacity">Override background opacity</string>
