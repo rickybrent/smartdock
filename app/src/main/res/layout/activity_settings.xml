@@ -3,6 +3,7 @@
 	android:layout_height="match_parent"
 	android:fitsSystemWindows="true"
 	android:id="@+id/settings_container"
-	android:orientation="vertical">
+	android:orientation="vertical"
+	android:clipToPadding="false">
 
 </LinearLayout>

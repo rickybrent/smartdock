@@ -9,6 +9,7 @@ import android.provider.Settings
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.Button
 import android.widget.Toast
 import android.widget.ViewSwitcher
@@ -26,11 +27,12 @@ import cu.axel.smartdock.services.NotificationService
 import cu.axel.smartdock.utils.AppUtils
 import cu.axel.smartdock.utils.ColorUtils
 import cu.axel.smartdock.utils.DeviceUtils
+import cu.axel.smartdock.utils.Utils
 import rikka.shizuku.Shizuku
 import kotlin.reflect.KFunction0
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceChangeListener {
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var permissionsDialog: AlertDialog
     private lateinit var overlayBtn: MaterialButton
@@ -52,6 +54,7 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager.beginTransaction()
             .replace(R.id.settings_container, PreferencesFragment())
             .commit()
+        sharedPreferences.registerOnSharedPreferenceChangeListener(this)
         if (!DeviceUtils.hasStoragePermission(this)) {
             DeviceUtils.requestStoragePermissions(this)
         }
@@ -62,7 +65,7 @@ class MainActivity : AppCompatActivity() {
             showPermissionsDialog()
         if (sharedPreferences.getInt("dock_layout", -1) == -1)
             DockLayoutDialog(this)
-
+        updateSettingsPadding()
 
 
         Shizuku.addBinderReceivedListener {
@@ -82,6 +85,12 @@ class MainActivity : AppCompatActivity() {
         if (::permissionsDialog.isInitialized && permissionsDialog.isShowing) {
             updatePermissionsStatus()
         }
+        updateSettingsPadding()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        sharedPreferences.unregisterOnSharedPreferenceChangeListener(this)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -228,6 +237,25 @@ class MainActivity : AppCompatActivity() {
         if (hasShizukuPermission) {
             shizukuBtn.setIconResource(R.drawable.ic_granted)
             shizukuBtn.iconTint = ColorStateList.valueOf(ColorUtils.getThemeColors(this, false)[0])
+        }
+    }
+
+    override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
+        if (key == "pin_dock" || key == "dock_height" || key == "dock_visible") {
+            updateSettingsPadding()
+        }
+    }
+
+    private fun updateSettingsPadding() {
+        val settingsContainer = findViewById<View>(R.id.settings_container) ?: return
+        val isPinned = sharedPreferences.getBoolean("pin_dock", true)
+        val isVisible = sharedPreferences.getBoolean("dock_visible", false)
+
+        if (isPinned || isVisible) {
+            val dockHeightDp = sharedPreferences.getString("dock_height", "56")?.toInt() ?: 56
+            settingsContainer.setPadding(0, 0, 0, Utils.dpToPx(this, dockHeightDp))
+        } else {
+            settingsContainer.setPadding(0, 0, 0, 0)
         }
     }
 

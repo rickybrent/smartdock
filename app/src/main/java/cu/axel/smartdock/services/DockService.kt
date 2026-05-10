@@ -758,13 +758,16 @@ class DockService : AccessibilityService(), OnSharedPreferenceChangeListener, On
     }
 
     private fun togglePin() {
-        if (isPinned) unpinDock() else pinDock()
+        val newPinned = !isPinned
+        sharedPreferences.edit { putBoolean("pin_dock", newPinned) }
+        if (newPinned) pinDock() else unpinDock()
     }
 
     private fun showDock() {
         //Hack to hide the dock on the lockscreen at boot
         dock!!.isVisible = !keyguardManager.isKeyguardLocked
         dockHandle!!.visibility = View.GONE
+        sharedPreferences.edit { putBoolean("dock_visible", true) }
 
         if (dockLayoutParams.height != dockHeight) {
             dockLayoutParams.height = dockHeight
@@ -780,6 +783,7 @@ class DockService : AccessibilityService(), OnSharedPreferenceChangeListener, On
 
     fun pinDock() {
         isPinned = true
+        sharedPreferences.edit { putBoolean("pin_dock", true) }
         pinBtn.setImageResource(R.drawable.ic_pin)
         if (dockLayout.isGone)
             showDock()
@@ -788,6 +792,7 @@ class DockService : AccessibilityService(), OnSharedPreferenceChangeListener, On
     private fun unpinDock() {
         pinBtn.setImageResource(R.drawable.ic_unpin)
         isPinned = false
+        sharedPreferences.edit { putBoolean("pin_dock", false) }
         if (dockLayout.isVisible)
             hideDock(500)
     }
@@ -801,6 +806,7 @@ class DockService : AccessibilityService(), OnSharedPreferenceChangeListener, On
                     override fun onAnimationStart(p1: Animation) {}
                     override fun onAnimationEnd(p1: Animation) {
                         dockLayout.visibility = View.GONE
+                        sharedPreferences.edit { putBoolean("dock_visible", false) }
                         val activationMethod =
                             sharedPreferences.getString("activation_method", "swipe")!!
                         if (activationMethod == "swipe") {
