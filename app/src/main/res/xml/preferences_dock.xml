@@ -44,5 +44,11 @@
             android:defaultValue="true"
             android:key="center_running_apps"
             android:title="@string/center_running_apps_title" />
+
+        <SwitchPreferenceCompat
+            android:defaultValue="false"
+            android:key="edge_to_edge_dock"
+            android:summary="@string/edge_to_edge_dock_summary"
+            android:title="@string/edge_to_edge_dock" />
     </PreferenceCategory>
 </PreferenceScreen>

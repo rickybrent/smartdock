@@ -123,6 +123,9 @@
     <string name="center_running_apps_title">ਸੈਂਟਰ ਚੱਲ ਰਹੀਆਂ ਐਪਾਂ</string>
     <string name="dock_activation_area_title">ਡੌਕ ਐਕਟੀਵੇਸ਼ਨ ਖੇਤਰ</string>
     <string name="dock_activation_area_summary">ਸਕ੍ਰੀਨ ਦੇ ਹੇਠਾਂ ਇਨਵਿਜੀਵਲ ਐਕਟੀਵੇਸ਼ਨ ਖੇਤਰ ਦੀ ਉਚਾਈ</string>
+    <string name="edge_to_edge_dock">Edge-to-edge Dock</string>
+    <string name="edge_to_edge_dock_summary">Removes horizontal padding from the sides of the dock to make it easier to tap on small devices</string>
+
 
     <!-- Desktop -->
     <string name="desktop">ਡੈਸਕਟਾਪ</string>

@@ -127,6 +127,8 @@
     <string name="center_running_apps_title">Center running apps</string>
     <string name="dock_activation_area_title">Dock activation area</string>
     <string name="dock_activation_area_summary">The height of the invisible activation area at the bottom of the screen</string>
+    <string name="edge_to_edge_dock">Edge-to-edge Dock</string>
+    <string name="edge_to_edge_dock_summary">Removes horizontal padding from the sides of the dock to make it easier to tap on small devices</string>
 
     <!-- Desktop -->
     <string name="desktop">Desktop</string>

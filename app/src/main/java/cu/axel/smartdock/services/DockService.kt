@@ -1422,7 +1422,8 @@ class DockService : AccessibilityService(), OnSharedPreferenceChangeListener, On
             preferSecondaryDisplay = sharedPreferences.getBoolean("prefer_last_display", false)
             if (DeviceUtils.getDisplays(this).size > 1)
                 restartUI()
-        }
+        } else if (preference == "edge_to_edge_dock")
+            updateDockPadding()
     }
 
     private fun updateDockTrigger() {
@@ -1453,6 +1454,17 @@ class DockService : AccessibilityService(), OnSharedPreferenceChangeListener, On
         if (isPinned) {
             dockLayoutParams.height = dockHeight
             windowManager.updateViewLayout(dock, dockLayoutParams)
+        }
+    }
+
+    private fun updateDockPadding() {
+        val edgeToEdge = sharedPreferences.getBoolean("edge_to_edge_dock", false)
+        if (edgeToEdge) {
+            dockLayout.setPaddingRelative(0, 0, 0, 0)
+        } else {
+            val start = Utils.dpToPx(context, 5)
+            val end = Utils.dpToPx(context, 10)
+            dockLayout.setPaddingRelative(start, 0, end, 0)
         }
     }
 
@@ -2245,6 +2257,7 @@ class DockService : AccessibilityService(), OnSharedPreferenceChangeListener, On
         updateNavigationBar()
         updateQuickSettings()
         updateDockShape()
+        updateDockPadding()
         updateMenuIcon()
         loadPinnedApps()
         placeRunningApps()
