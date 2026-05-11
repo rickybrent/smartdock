@@ -226,13 +226,12 @@ object DeviceUtils {
         displayId: Int = Display.DEFAULT_DISPLAY
     ): Rect {
         return try {
-            context.display
             val dm = context.getSystemService(Context.DISPLAY_SERVICE) as DisplayManager
             val display = dm.getDisplay(displayId)
-            //FIXME: This always returns the metrics of the default display
-            //val metrics = DisplayMetrics()
-            //display.getRealMetrics(metrics)
-            Rect(0, 0, display.width, display.height)
+            val displayContext = context.createDisplayContext(display)
+            val windowContext = displayContext.createWindowContext(WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY, null)
+            val windowManager = windowContext.getSystemService(Context.WINDOW_SERVICE) as WindowManager
+            windowManager.currentWindowMetrics.bounds
         } catch (_: UnsupportedOperationException) {
             val windowManager = context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
             windowManager.currentWindowMetrics.bounds

@@ -1561,8 +1561,18 @@ class DockService : AccessibilityService(), OnSharedPreferenceChangeListener, On
         updateNavigationBar()
         updateQuickSettings()
         updateBatteryBtn()
+        updateDockBounds()
         if (appMenuVisible)
             hideAppMenu()
+    }
+
+    private fun updateDockBounds() {
+        if (::dockLayoutParams.isInitialized && dock != null) {
+            val displayId =
+                if (preferSecondaryDisplay) DeviceUtils.getSecondaryDisplay(context).displayId else Display.DEFAULT_DISPLAY
+            dockLayoutParams.width = DeviceUtils.getDisplayBounds(context, displayId).width()
+            windowManager.updateViewLayout(dock, dockLayoutParams)
+        }
     }
 
     private fun updateDockShape() {
